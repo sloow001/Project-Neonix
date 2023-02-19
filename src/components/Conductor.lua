@@ -59,7 +59,7 @@ end
 function conductor.update(dt)
     if audio ~= nil then
         conductor.songPosition = audio:tell("seconds") - conductor.dspSongTime - conductor.firstBeatOffset
-        conductor.songPositionInBeats = conductor.songPosition / conductor.secPerBeat
+        conductor.songPositionInBeats = math.floor(conductor.songPosition / conductor.secPerBeat)
         conductor.songPositionInSteps = math.floor(audio:tell("seconds") - conductor.dspSongTime / conductor.stepCrochet)
     end
 end

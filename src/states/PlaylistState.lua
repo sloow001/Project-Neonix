@@ -2,11 +2,17 @@ playlist = {}
 
 function playlist:init()
     transition = require 'src.Transition'
+    conductor = require 'src.components.Conductor'
     currentSelection = 1
     songlist = {
         "dubnix",
         "neon-code",
         "nip-trip",
+    }
+    songlistBpm = {
+        85,
+        87,
+        87,
     }
 
     quicksand = love.graphics.newFont("resources/fonts/quicksand-light.ttf", 40)
@@ -68,6 +74,7 @@ function playlist:keypressed(k)
         end
         if k == Controls.Keyboard.ACCEPT then
             playstate.levelToLoad = songlist[currentSelection]
+            conductor.bpm = songlistBpm[currentSelection]
             isTransitioning = true
         end
     end
