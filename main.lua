@@ -33,7 +33,7 @@ function love.load()
     effect.glow.min_luma = 0.3
 
     gamestate.registerEvents()
-    gamestate.switch(states.Playlist)
+    gamestate.switch(states.Menu)
 end
 
 function love.draw()

@@ -1,6 +1,7 @@
 player = {}
 
 atlasparser = require 'src.components.AtlasParser'
+shoot = require 'src.events.Shoot'
 
 function player:set(x, y)
     self.x = x
@@ -33,9 +34,11 @@ function player:update(elapsed)
     if love.keyboard.isDown(Controls.Keyboard.RIGHT) then
         self.x = self.x + 5
     end
+
     self.hitbox.x = self.x
     self.hitbox.y = self.y
 
+    -- animtion controller
     self.AnimFrameUpdate = self.AnimFrameUpdate + 1
     if self.AnimFrameUpdate > 20 then
         self.AnimFrame = self.AnimFrame + 1
@@ -44,6 +47,11 @@ function player:update(elapsed)
             self.AnimFrame = 1
         end
     end
+end
+
+-- expose hitbox table
+function player:getHitbox()
+    return self.hitbox
 end
 
 return player

@@ -1,7 +1,18 @@
 options = {}
 
 function options:init()
-    
+    states = {
+        {
+            "Visuals",
+            "Audio",
+            "Controls",
+        },
+        {
+            "Shaders",
+            "Audio",
+            "Controls",
+        },
+    }
 end
 
 function options:draw()

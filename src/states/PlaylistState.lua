@@ -77,6 +77,11 @@ function playlist:keypressed(k)
             conductor.bpm = songlistBpm[currentSelection]
             isTransitioning = true
         end
+        if k == Controls.Keyboard.BACK then
+            playstate.levelToLoad = songlist[currentSelection]
+            conductor.bpm = songlistBpm[currentSelection]
+            isTransitioning = true
+        end
     end
 end
 

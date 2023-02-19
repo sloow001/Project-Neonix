@@ -5,9 +5,14 @@ function levelselect:init()
     atlasparser = require 'src.components.AtlasParser'
 
     arrowImg, arrowQuads = atlasparser.getQuads("levelselect/arrows")
-    levelImg, levelQuads = atlasparser.getQuads("levelselect/levelselect")
+    --levelImg, levelQuads = atlasparser.getQuads("levelselect/levelselect")
     bg = love.graphics.newImage("resources/images/bgs/game_bg5.png")
     currentLevel = 1
+
+    quicksand = love.graphics.newFont("resources/fonts/quicksand-light.ttf", 40)
+    love.graphics.setFont(quicksand)
+
+    isTransitioning = false
 
     levels = {
         "Tutorial",
@@ -50,7 +55,7 @@ function levelselect:draw()
 end
 
 function levelselect:update(elapsed)
-    transition.update(elapsed)
+    onComplete = transition.update(elapsed)
 
     if currentLevel < 1 then
         currentLevel = #levels
@@ -58,14 +63,25 @@ function levelselect:update(elapsed)
     if currentLevel > #levels then
         currentLevel = 1
     end
+
+    if onComplete and isTransitioning then
+        gamestate.switch(states.Menu)
+    end
 end
 
 function levelselect:keypressed(k, code)
-    if k == Controls.Keyboard.SELECT_LEFT then
-        currentLevel = currentLevel - 1
-    end
-    if k == Controls.Keyboard.SELECT_RIGHT then
-        currentLevel = currentLevel + 1
+    if not isTransitioning then
+        if k == Controls.Keyboard.SELECT_LEFT then
+            currentLevel = currentLevel - 1
+        end
+        if k == Controls.Keyboard.SELECT_RIGHT then
+            currentLevel = currentLevel + 1
+        end
+        if k == Controls.Keyboard.BACK then
+            isTransitioning = true
+            transition.newIn(2)
+            
+        end
     end
 end
 

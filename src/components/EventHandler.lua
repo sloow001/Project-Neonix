@@ -17,10 +17,6 @@ function eventhandler.update(elapsed)
             print("[EVENT] : On beat")
             pcall(code(), onBeat())
         end
-        if utilities.varChanged(conductor.songPositionInSteps) then
-            print("[EVENT] : On step")
-            pcall(code(), onStep())
-        end
     end
 end
 
