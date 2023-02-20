@@ -20,12 +20,14 @@ function love.load()
 	joystick = joysticks[1]
 
     states = {
+        Logostate = require 'src.states.resources.LogoState',
         Menu = require 'src.states.MenuState',
         LevelEditor = require 'src.states.LevelEditorState',
         LevelSelect = require 'src.states.LevelSelectState',
         Playstate = require 'src.states.Playstate',
         Options = require 'src.states.OptionsState',
-        Playlist = require 'src.states.PlaylistState'
+        Playlist = require 'src.states.PlaylistState',
+        Credits = require 'src.states.CreditsState'
         --EventEditor = require 'src.states.EventEditor'
     }
 

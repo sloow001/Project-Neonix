@@ -4,9 +4,9 @@ shoot.Shoots = {}
 
 function shoot.new(x, y, speed)
     Shoot = {
-        x = x,
-        y = y,
-        speed = speed
+        x = x or math.random(1, 5),
+        y = y or math.random(1, 5),
+        speed = speed or math.random(1, 5)
     }
     Shoot.texture = love.graphics.newImage("resources/images/objects/projectile.png")
     Shoot.w = Shoot.texture:getWidth()

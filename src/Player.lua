@@ -22,17 +22,19 @@ function player:render()
 end
 
 function player:update(elapsed)
-    if love.keyboard.isDown(Controls.Keyboard.UP) then
-        self.y = self.y - 5
-    end
-    if love.keyboard.isDown(Controls.Keyboard.DOWN) then
-        self.y = self.y + 5
-    end
-    if love.keyboard.isDown(Controls.Keyboard.LEFT) then
-        self.x = self.x - 5
-    end
-    if love.keyboard.isDown(Controls.Keyboard.RIGHT) then
-        self.x = self.x + 5
+    if isPlayerAlive then
+        if love.keyboard.isDown(Controls.Keyboard.UP) then
+            self.y = self.y - 5
+        end
+        if love.keyboard.isDown(Controls.Keyboard.DOWN) then
+            self.y = self.y + 5
+        end
+        if love.keyboard.isDown(Controls.Keyboard.LEFT) then
+            self.x = self.x - 5
+        end
+        if love.keyboard.isDown(Controls.Keyboard.RIGHT) then
+            self.x = self.x + 5
+        end
     end
 
     self.hitbox.x = self.x

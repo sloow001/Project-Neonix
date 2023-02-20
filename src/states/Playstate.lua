@@ -9,12 +9,14 @@ function playstate:init()
     eventhandler = require 'src.components.EventHandler'
     Math = require 'src.Math'
     shoot = require 'src.events.Shoot'
+    timer = require 'libraries.timer'
     
     Camera = camera(love.graphics.getWidth() / 2 , love.graphics.getHeight() / 2)
     bg = love.graphics.newImage("resources/images/bgs/game_bg5.png")
     tileImage, tileQuads = atlasparser.getQuads("atlas_sheet1")
     
     player:set(0, love.graphics.getHeight() / 2)
+    isPlayerAlive = true
 
     MapSettings = {
         speed = 1.0,
@@ -41,7 +43,8 @@ function playstate:draw()
             for k, Block in pairs(MapSettings.Blocks) do
                 love.graphics.draw(tileImage, tileQuads[Block.id], Block.x, Block.y)
             end    
-        Camera:detach()  
+        Camera:detach()
+        conductor.render()
     end)
 end
 
@@ -58,14 +61,20 @@ function playstate:update(elapsed)
         if Block.x < 0 then
             table.remove(MapSettings.Blocks, k)
         end
-        if utilities.collision(player:getHitbox(), Block) then
-            print("[COLLISION] block")
+        if utilities.collision(player:getHitbox(), Block) and isPlayerAlive then
+            timer.after(3, function()
+                isPlayerAlive = false
+                print("[COLLISION] block")
+            end)
         end
     end
 
     for k, projectile in pairs(shoot.Shoots) do
-        if utilities.collision(player:getHitbox(), projectile) then
-            print(print("[COLLISION] shoot"))
+        if utilities.collision(player:getHitbox(), projectile) and isPlayerAlive then
+            timer.after(3, function()
+                isPlayerAlive = false
+                print("[COLLISION] shoot")
+            end)
         end
     end
 end
@@ -74,6 +83,10 @@ end
 
 function cameraBump(amount)
     camZoom = amount
+end
+
+function newBullet(y, speed)
+    
 end
 
 return playstate

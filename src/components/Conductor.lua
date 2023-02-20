@@ -1,14 +1,14 @@
-conductor = {
-    bpm = 0.0,
-    secPerBeat = 0,
-    songPosition = 0,
-    songPositionInBeats = 0,
-    crochet = 0,
-    stepCrochet = 0,
-    firstBeatOffset = 0,
-    dspSongTime = 0,
-    songPositionInSteps = 0,
-}
+conductor = {}
+
+conductor.bpm = 0.0
+conductor.secPerBeat = 0
+conductor.songPosition = 0
+conductor.songPositionInBeats = 0
+conductor.crochet = 0
+conductor.stepCrochet = 0
+conductor.firstBeatOffset = 0
+conductor.dspSongTime = 0
+conductor.songPositionInSteps = 0
 
 
 function conductor.load(filename)
@@ -54,6 +54,12 @@ function conductor.stop()
     else
         return false
     end
+end
+
+function conductor.render()
+    love.graphics.print(tostring(conductor.songPosition), 10, 500)
+    love.graphics.print(tostring(conductor.songPositionInBeats), 10, 530)
+    love.graphics.print(tostring(conductor.songPositionInSteps), 10, 560)
 end
 
 function conductor.update(dt)
